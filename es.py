@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 
+'''
+    1. test elasticsearch
+    2. import data
+'''
+
 from elasticsearch import Elasticsearch, RequestsHttpConnection
 from requests_aws4auth import AWS4Auth
 import json
@@ -24,34 +29,41 @@ if REMOTE:
 else:
     es = Elasticsearch()
 
-query = {"query" : {"exists" : { "field" : "geo" }}}
-es.search(index='twit3', body=query)
 '''
+todo: delete index
+query = {"query" : {"exists" : { "field" : "geo" }}}
+res = es.search(index='twit3', body=query)
 es.get(index='posts', doc_type='blog', id=1)
 es.search(index='posts', q='author:"Benjamin Pollack" python')
 '''
 
 
-def import_twits():
+def import_twits(file_name, index):
     # ref: https://bitquabit.com/post/having-fun-python-and-elasticsearch-part-1/
     # if file is large,
     # use [Bulk API](https://www.elastic.co/guide/en/elasticsearch/reference/1.5/docs-bulk.html)
-    fp = open('twits.json')
+    fp = open(file_name)
     line = "foobar"
     count = 0
-    start = 1
-    while line:
+    start = 817
+    while True:
         line = fp.readline()
+        if not line: break
         if len(line) == 1: continue
         count += 1
         if count < start: continue
         print('line:',len(line))
         meta = json.loads(line[:-1])
-        twitter = {"created_at": meta["created_at"], "text": meta["text"], \
-        "user": {"id": meta["user"]["id"], "name": meta["user"]["name"], "location":\
-         meta["user"]["location"] }, "geo": meta["geo"], "coordinates": meta["coordinates"],\
-         "place": meta["place"] }
-        print(len(twitter))
-        es.index(index = 'twit3', doc_type = 'twits', id = meta['id'], body = twitter)
+        try:
+            twitter = {"created_at": meta["created_at"], "text": meta["text"], \
+            "user": {"id": meta["user"]["id"], "name": meta["user"]["name"], "location":\
+             meta["user"]["location"] }, "geo": meta["geo"], "coordinates": meta["coordinates"],\
+             "place": meta["place"] }
+            es.index(index = index, doc_type = 'twits', id = meta['id'], body = twitter)
+        except Exception as e:
+            print(line)
+            print(e)
         #sleep(1)
-        print(count)
+        print('#',count)
+
+import_twits('tweetMessi.json', 'trip, travel, journey')
