@@ -6,14 +6,13 @@ var map, heatmap, points;
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 13,
-        center: {lat: 37.775, lng: -122.434},
+        zoom: 2,
+        center: {lat: 0, lng: 0},
         mapTypeId: google.maps.MapTypeId.SATELLITE
     });
     $.when(getPoints()).then(function() {
         heatmap = new google.maps.visualization.HeatmapLayer({
             data: points,
-            // should make a call to your backend server (flask)
             map: map
         });
     });
@@ -61,7 +60,7 @@ function getPoints() {
         points = [];
         $.each( data, function( key, val ) { // key == geo
             val.forEach(function(coord) {
-                points.push(new google.maps.LatLng(coord['coordinates'][0], coord['coordinates'][1]));
+                points.push(new google.maps.LatLng(coord['coordinates'][1], coord['coordinates'][0]));
             })
         });
         deferred.resolve();

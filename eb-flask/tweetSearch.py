@@ -9,11 +9,11 @@ es = Elasticsearch()
 import logging
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
-fh = logging.FileHandler('log_tweetSearch.txt')
-#fh.setLevel(logging.DEBUG)
-ch = logging.StreamHandler()
+fh = logging.FileHandler('log.txt')
+fh.setLevel(logging.DEBUG)
+#ch = logging.StreamHandler()
 logger.addHandler(fh)
-logger.addHandler(ch)
+#logger.addHandler(ch)
 
 '''
 def test_es():

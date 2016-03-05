@@ -66,4 +66,4 @@ def import_twits(file_name, index):
         #sleep(1)
         print('#',count)
 
-import_twits('tweetMessi.json', 'trip, travel, journey')
+import_twits('tweetMessi.json', 'messi')

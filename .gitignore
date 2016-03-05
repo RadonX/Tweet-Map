@@ -1,0 +1,21 @@
+# Key, private file
+certificate/*
+eb-flask/setting.py
+
+# Programming Files
+*.iml
+*.json
+eb-flask/__pycache__
+eb-flask/log*
+#.gitignore
+
+# not related
+frontend/boot*
+frontend/examples/*
+FoodTrucks/*
+elasticsearch-2.2.0*
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
