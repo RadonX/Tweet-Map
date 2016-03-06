@@ -4,9 +4,10 @@ eb-flask/setting.py
 
 # Programming Files
 *.iml
-*.json
+place.json
+tweetMessi.json
 eb-flask/__pycache__
-eb-flask/log*
+eb-flask/log.txt
 #.gitignore
 
 # not related

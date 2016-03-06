@@ -2,36 +2,33 @@
 from flask import Flask, jsonify, request, render_template
 import sys
 
-INDEX = 'twit3'
+INDEX = 'place'
 from tweetSearch import tweetSearch
 tweetsearch = tweetSearch()
 tweetsearch.safe_check_index(INDEX)
 
 application = Flask(__name__)
 
-'''
-sys.exit(1)
-x.strip().lower()
-'''
 
 @application.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', field = '_all')
 
-@application.route('/search')
+@application.route('/search', methods=['GET'])
 def search():
-    key = request.args.get('q')
-    if not key:
-        return jsonify({
-            "status": "failure",
-            "msg": "Please provide a query"
-        })
-    return 'search'
+    keyword = request.args.get('keyword')
+    if not keyword:
+        keyword = '_all'
+    return render_template('index.html', field = keyword)
 
-@application.route('/alltweet')
-def alltweet():
-    query = {"query" : {"exists" : { "field" : "geo" }}}
-    #query = {"query" : { "match_all": {} }} #4
+@application.route('/json', methods=['GET'])
+def json():
+    keyword = request.args.get('keyword')
+    if (keyword == '_all') or (not keyword):
+        #query = {"query": {"exists": {"field": "geo"}}, "size": 500}
+        query = {"query": {"match_all": {}}, "size": 500}
+    else:
+        query = {"query": {"match_phrase": {"text": keyword}}, "size": 500}
     result = tweetsearch.query_data(index = INDEX, query = query)
     return jsonify(result)
 

@@ -50,13 +50,15 @@ function changeOpacity() {
     heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
 }
 
+console.log('fetch json file: ' + field);
+
 // Heatmap data: 500 Points
 function getPoints() {
     var deferred = $.Deferred();
     // ref: http://stackoverflow.com/questions/15360393/force-code-to-execute-after-another-method-finishes-executing
 
     /* data format: getJSON[geometry]*/
-    $.getJSON('alltweet', function(data) {
+    $.getJSON('json?keyword='+field, function(data) {
         points = [];
         $.each( data, function( key, val ) { // key == geo
             val.forEach(function(coord) {

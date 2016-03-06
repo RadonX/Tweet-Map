@@ -104,6 +104,6 @@ body {
   border-radius: 50%;
 }
 
-#map {
-  height: 500px;
+html, body, .jumbotron, .container, #map {
+  height: 100%;
 }

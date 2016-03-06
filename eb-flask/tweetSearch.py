@@ -1,10 +1,19 @@
 #!/usr/bin/env python3
-from elasticsearch import Elasticsearch, exceptions
+from elasticsearch import Elasticsearch, exceptions, RequestsHttpConnection
 from time import sleep
 
 from setting import *
-#es = Elasticsearch(host=HOST)
-es = Elasticsearch()
+from requests_aws4auth import AWS4Auth
+REGION = "us-east-1"
+awsauth = AWS4Auth(YOUR_ACCESS_KEY, YOUR_SECRET_KEY, REGION, 'es')
+es = Elasticsearch(
+    hosts=[{'host': HOST, 'port': 443}],
+    http_auth=awsauth,
+    use_ssl=True,
+    verify_certs=True,
+    connection_class=RequestsHttpConnection
+)
+#es = Elasticsearch()
 
 import logging
 logger = logging.getLogger()
@@ -15,29 +24,10 @@ fh.setLevel(logging.DEBUG)
 logger.addHandler(fh)
 #logger.addHandler(ch)
 
-'''
-def test_es():
-    resp = {}
-    try:
-        msg = es.cat.indices()
-        resp["msg"] = msg
-        resp["status"] = "success"
-    except:
-        resp["status"] = "failure"
-        resp["msg"] = "Unable to reach ES"
-    #return jsonify(resp)
-
-res = es.search(
-        index="sfdata",
-        body={
-            "query": {"match": {"fooditems": key}},
-            "size": 750 # max document size
-      })
-
-'''
 
 class tweetSearch(object):
     """docstring for tweetSearch"""
+
     def __init__(self):
         pass
 
@@ -56,6 +46,8 @@ class tweetSearch(object):
         if not self.safe_check_index(index):
             print("Index not found...")
         esdata = es.search(index = index, body = query)
+        # es.get(index='posts', doc_type='blog', id=1)
+        # es.search(index='posts', q='author:"Benjamin Pollack" python')
         logger.debug(str(esdata))
         try:
             hits = esdata['hits']['hits']
@@ -69,7 +61,7 @@ class tweetSearch(object):
 
         #exp
         # filtering results
-        #vendors = set([x["_source"]["applicant"] for x in hits)
+        #res = set(x["_source"]["key"] for x in hits)
 
 
     def parse_coord_data(self, srclist):
@@ -77,17 +69,7 @@ class tweetSearch(object):
         for src in srclist:
             try:
                 coord['geo'].append(src['_source']['coordinates'])#['coordinates'])
-                #~ ['geo']
             except Exception as e:
                 #print(e)
                 continue
         return coord
-
-    # --------------------------
-    def load_data_in_es(self):
-        """ creates an index in elasticsearch """
-        #r = requests.get(url)
-        data = r.json()
-        for id, truck in enumerate(data):
-            res = es.index(index="sfdata", doc_type="truck", id=id, body=truck)
-        print("Total trucks loaded: ", len(data) )
