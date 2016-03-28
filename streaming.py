@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import absolute_import, print_function
 
-
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
@@ -35,5 +34,3 @@ if __name__ == '__main__':
 
     stream = Stream(auth, l)
     stream.filter(track=['concert','trip','running','party'])
-    #print(stream)
-    # a list of clubs
