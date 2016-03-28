@@ -9,7 +9,7 @@
         starting from line [-s] to ElasticSearch with [-i index]
         > python3 es.py -s 1 -n 500 -f 'place.json' -i 'place'
     3. upload newly fetched data from Twitter
-        > python3 es.py -s -r -1 -i 'place_'
+        > python3 es.py -r -s -1 -i 'place_'
 '''
 
 from elasticsearch import Elasticsearch, RequestsHttpConnection
