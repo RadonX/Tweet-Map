@@ -1,17 +1,22 @@
 class TweetsController < ApplicationController
 
   def index
-
     result = @client.search index: 'place', body: { query: { match_all: {} }, size: 10 }
     @tweets = result['hits']['hits'] #array
     # puts @tweets
     render text: "hello, world!"
-
   end
+
+  def submit
+  end
+
+
+  skip_before_action :verify_authenticity_token
 
   # POST /tweets
   def create
-
+    puts params
+    render text: "hello, world!"
   end
 
   include ActionController::Live

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get 'tweets/index'
   # get 'show/stream' => 'tweets#stream'
+  get 'tweets/submit'
   get 'tweets/stream'
   post 'tweets' => 'tweets#create'
 
