@@ -1,6 +1,8 @@
 # Key, private file
 certificate/*
 eb-flask/setting.py
+/eb-rails/config/application.rb
+
 
 # Programming Files
 *.iml
