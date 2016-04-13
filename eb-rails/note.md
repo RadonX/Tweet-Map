@@ -64,6 +64,12 @@ http://www.sitepoint.com/full-text-search-rails-elasticsearch/
     end
   end
 
+3. # Do not keep production secrets in the repository,
+   # instead read values from the environment.
+   production:
+     secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>
+
+
 #### possible problems
 
 1. Amazon EC access policy
