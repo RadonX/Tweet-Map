@@ -1,4 +1,4 @@
-var source = new EventSource('/tweet/stream');
+var source = new EventSource('/tweets/stream');
 source.onmessage = function(e) {
     document.body.innerHTML += e.data + '<br>';
 };

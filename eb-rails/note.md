@@ -27,12 +27,23 @@
 
 http://guides.rubyonrails.org/asset_pipeline.html
 
+
+<% content_for :bodyfoot do %>
+    <%= javascript_include_tag '/assets/map', async: true, defer: true %>
+<% end %>
+
+config.assets.precompile += %w(.js)
+
+Active Record??
+
 ### Ruby
 
     client.index  index: 'myindex', type: 'mytype', id: 1, body: { title: 'Test' }
 # => {"_index"=>"myindex", ... "created"=>true}
 
 what's patron
+
+
 ---
 
 #### todo
@@ -74,6 +85,7 @@ http://www.sitepoint.com/full-text-search-rails-elasticsearch/
 
 1. Amazon EC access policy
 
+2. [asset not precompiled in rails 3 | codedecoder](https://codedecoder.wordpress.com/2012/11/05/asset-not-precompiled-asset_pipeline-rails-3/)
 
 #### Reference
 
