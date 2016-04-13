@@ -1,6 +1,8 @@
 class TweetsController < ApplicationController
 
   def index
+    set_amazon_es
+
     result = @client.search index: 'place', body: { query: { match_all: {} }, size: 10 }
     @tweets = result['hits']['hits'] #array
     # puts @tweets
@@ -15,8 +17,7 @@ class TweetsController < ApplicationController
 
   # POST /tweets
   def create
-    puts params
-    render text: "hello, world!"
+    render text: request.body.read
   end
 
   include ActionController::Live
@@ -71,7 +72,7 @@ class TweetsController < ApplicationController
   end
 
   def initialize
-    set_amazon_es
+
   end
 
 end
