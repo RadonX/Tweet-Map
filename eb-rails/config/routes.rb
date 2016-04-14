@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   root 'main#home'
   get 'show' => 'main#show'
 
-  get 'tweets/index'
+  get 'tweets/search' #~~ json
+
   # get 'show/stream' => 'tweets#stream'
-  get 'tweets/submit'
   get 'tweets/stream'
   post 'tweets' => 'tweets#create'
 
