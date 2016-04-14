@@ -89,7 +89,7 @@ http://www.sitepoint.com/full-text-search-rails-elasticsearch/
 
 5. page is re rendered
    save data directly
-  
+
 
 
 #### possible problems

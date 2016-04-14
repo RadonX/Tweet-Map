@@ -98,7 +98,8 @@
   var field = 'all';
 </script>
 
+<%= javascript_include_tag 'map.js', async: true, defer: true  %>
+
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDhmjEizB3PyRpcPrKCaqg6ugtJJlFIw8&libraries=visualization&callback=initMap">
 </script>
-<%= javascript_include_tag 'map.js', async: true, defer: true  %>
