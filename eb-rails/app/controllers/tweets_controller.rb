@@ -6,7 +6,7 @@ class TweetsController < ApplicationController
     result = @client.search index: 'place', body: { query: { match_all: {} }, size: 10 }
     @tweets = result['hits']['hits'] #array
     # puts @tweets
-    render text: "hello, world!"
+
   end
 
   def submit
@@ -17,6 +17,7 @@ class TweetsController < ApplicationController
 
   # POST /tweets
   def create
+    puts request.body.read
     render text: request.body.read
   end
 

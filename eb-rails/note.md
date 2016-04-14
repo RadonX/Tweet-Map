@@ -13,9 +13,6 @@
 <!--script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script-->
 <script src="static/js/bootstrap.min.js"></script>
 
----
-
-    render text: "hello, world!"
 
 ---
 
@@ -44,6 +41,8 @@ Active Record??
 what's patron
 
 
+The best practice for ingesting Tweets and other streaming messages is to decouple collection and processing of high volume streams. For example, collect the raw text of messages in one process, passing each message into a message queue, rotated flatfile, or database. A second process or set of processes should parse the messages and extract any necessary fields for storage or further manipulation.
+
 ---
 
 #### todo
@@ -54,7 +53,6 @@ new(ENV['AWS_ACCESS_KEY'], ENV['AWS_SECRET_ACCESS_KEY']),
 
 arn:aws:sns:us-east-1:664206762806:entertainment
 
-http://stackoverflow.com/questions/20857886/where-can-i-store-site-wide-variables-in-rails-4
 
 
 [Getting Started with Elasticsearch on Rails](http://www.codinginthecrease.com/news_article/show/409843?referrer_id=948927)
@@ -81,6 +79,10 @@ http://www.sitepoint.com/full-text-search-rails-elasticsearch/
      secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>
 
 
+# signal.pause()
+
+
+
 #### possible problems
 
 1. Amazon EC access policy
@@ -94,3 +96,26 @@ http://www.sitepoint.com/full-text-search-rails-elasticsearch/
 2. https://github.com/rails/jbuilder
 
 3. [ActionController::Live::SSE](http://api.rubyonrails.org/classes/ActionController/Live/SSE.html)
+
+
+
+---
+
+
+{
+  "Type" : "Notification",
+  "MessageId" : "ade681d5-28ea-52e6-af65-ce5d979a7f09",
+  "TopicArn" : "arn:aws:sns:us-east-1:664206762806:entertainment",
+  "Subject" : "try again",
+  "Message" : "sraintoairntioanrt",
+  "Timestamp" : "2016-04-13T21:42:08.389Z",
+  "SignatureVersion" : "1",
+  "Signature" : "OZJ+fYraa0Ox5aDIC13WtfzAsjFmZb+CpWi066i9z9NXmwJZHw3LGdjHMX5/pTbBnLqSplLbjZTk+kHktplEraKBXtOQUv5iBYzuux8W3HKou0+SOPqL6g/mSWxV62RCLCRrAuHg1bFGA9eccN33glxCsP3UZga6QB+5qC+X1EIP08U/9AJWB+Aqiwrp5UCbx1yYJ10S5ETo9i67WhF5cHg38EGTmFaduCuhgv066WsZCHZO+wBJ/Fjy5kHCKEUcWzfnf+PoUuZiu9wBaKzdjhusqzHArixZvH3XZan2yVP5l6dGPAysK+40Vi9s+kf8YwKpv81swbArbx5AS8SsKA==",
+  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-bb750dd426d95ee9390147a5624348ee.pem",
+  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:664206762806:entertainment:386f4e07-8496-42fb-9266-7f2bbc65d289",
+  "MessageAttributes" : {
+    "AWS.SNS.MOBILE.MPNS.Type" : {"Type":"String","Value":"token"},
+    "AWS.SNS.MOBILE.MPNS.NotificationClass" : {"Type":"String","Value":"realtime"},
+    "AWS.SNS.MOBILE.WNS.Type" : {"Type":"String","Value":"wns/badge"}
+  }
+}
