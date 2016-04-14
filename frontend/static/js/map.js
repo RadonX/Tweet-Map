@@ -6,7 +6,7 @@ var map, heatmap, points;
 
 
 function initMap() {
-  var myLatLng = [{lat: 37.782551, lng: -122.445368},
+  /*var myLatLng = [{lat: 37.782551, lng: -122.445368},
   {lat: 37.782745, lng: -122.444586},
   {lat: 37.782842, lng: -122.443688},
   {lat: 37.782919, lng: -122.442815},
@@ -521,12 +521,13 @@ function initMap() {
         t = 0;
       }
       var tmp = {
-        tweettype:"party",
+        tweettype:"concert",
         sentiment: t,
         LatLng:myLatLng[i]
       };
       myData[i]=tmp;
-    }
+    }*/
+    var myData = processPoints();
 
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 2,
@@ -606,24 +607,24 @@ var icon_tripneg = {
   origin: new google.maps.Point(0,0), // origin
   anchor: new google.maps.Point(0, 0) // anchor
 };
-  var lowerbound = -1, upperbound = 1, posbound = 0.3, negbound = -0.3;
-  for (var i=0;i<500;i++){
+  //var lowerbound = -1, upperbound = 1, posbound = 0.3, negbound = -0.3;
+  for (var i=0;i<myData.length;i++){
     if (myData[i].tweettype == "concert") {
-      var lambda = 1;
-      if (myData[i].sentiment >= lowerbound && myData[i].sentiment <= negbound) {
+      //var lambda = 1;
+      if (myData[i].sentiment == "negative") {
         var marker = new google.maps.Marker({
           position: myData[i].LatLng,
           map: map,
-          //title: 'Hello World!'
+          title: myData[i].tweet,
           icon: icon_concertneg,
           animation: google.maps.Animation.DROP
         });
       }
-      else if(myData[i].sentiment >= posbound && myData[i].sentiment <= upperbound){
+      else if(myData[i].sentiment == "positive"){
         var marker = new google.maps.Marker({
           position: myData[i].LatLng,
           map: map,
-          //title: 'Hello World!'
+          title: myData[i].tweet,
           icon: icon_concertpos,
           animation: google.maps.Animation.DROP
         });
@@ -632,28 +633,28 @@ var icon_tripneg = {
           var marker = new google.maps.Marker({
             position: myData[i].LatLng,
             map: map,
-            //title: 'Hello World!'
+            title: myData[i].tweet,
             icon: icon_concert,
             animation: google.maps.Animation.DROP
           });
       }
     }
     else if (myData[i].tweettype == "party") {
-      var lambda = 1;
-      if (myData[i].sentiment >= lowerbound && myData[i].sentiment <= negbound) {
+      //var lambda = 1;
+      if (myData[i].sentiment == "negative") {
         var marker = new google.maps.Marker({
           position: myData[i].LatLng,
           map: map,
-          //title: 'Hello World!'
+          title: myData[i].tweet,
           icon: icon_partyneg,
           animation: google.maps.Animation.DROP
         });
       }
-      else if(myData[i].sentiment >= posbound && myData[i].sentiment <= upperbound){
+      else if(myData[i].sentiment == "positive"){
         var marker = new google.maps.Marker({
           position: myData[i].LatLng,
           map: map,
-          //title: 'Hello World!'
+          title: myData[i].tweet,
           icon: icon_partypos,
           animation: google.maps.Animation.DROP
         });
@@ -662,28 +663,28 @@ var icon_tripneg = {
           var marker = new google.maps.Marker({
             position: myData[i].LatLng,
             map: map,
-            //title: 'Hello World!'
+            title: myData[i].tweet,
             icon: icon_party,
             animation: google.maps.Animation.DROP
           });
       }
     }
-    else if (myData[i].tweettype == "run") {
-      var lambda = 1;
-      if (myData[i].sentiment >= lowerbound && myData[i].sentiment <= negbound) {
+    else if (myData[i].tweettype == "running") {
+      //var lambda = 1;
+      if (myData[i].sentiment == "negative") {
         var marker = new google.maps.Marker({
           position: myData[i].LatLng,
           map: map,
-          //title: 'Hello World!'
+          title: myData[i].tweet,
           icon: icon_runneg,
           animation: google.maps.Animation.DROP
         });
       }
-      else if(myData[i].sentiment >= posbound && myData[i].sentiment <= upperbound){
+      else if(myData[i].sentiment == "positive"){
         var marker = new google.maps.Marker({
           position: myData[i].LatLng,
           map: map,
-          //title: 'Hello World!'
+          title: myData[i].tweet,
           icon: icon_runpos,
           animation: google.maps.Animation.DROP
         });
@@ -692,7 +693,7 @@ var icon_tripneg = {
           var marker = new google.maps.Marker({
             position: myData[i].LatLng,
             map: map,
-            //title: 'Hello World!'
+            title: myData[i].tweet,
             icon: icon_run,
             animation: google.maps.Animation.DROP
           });
@@ -700,20 +701,20 @@ var icon_tripneg = {
     }
     else if (myData[i].tweettype == "trip") {
       var lambda = 1;
-      if (myData[i].sentiment >= lowerbound && myData[i].sentiment <= negbound) {
+      if (myData[i].sentiment == "negative") {
         var marker = new google.maps.Marker({
           position: myData[i].LatLng,
           map: map,
-          //title: 'Hello World!'
+          title: myData[i].tweet,
           icon: icon_tripneg,
           animation: google.maps.Animation.DROP
         });
       }
-      else if(myData[i].sentiment >= posbound && myData[i].sentiment <= upperbound){
+      else if(myData[i].sentiment == "positive"){
         var marker = new google.maps.Marker({
           position: myData[i].LatLng,
           map: map,
-          //title: 'Hello World!'
+          title: myData[i].tweet,
           icon: icon_trippos,
           animation: google.maps.Animation.DROP
         });
@@ -722,7 +723,7 @@ var icon_tripneg = {
           var marker = new google.maps.Marker({
             position: myData[i].LatLng,
             map: map,
-            //title: 'Hello World!'
+            title: myData[i].tweet,
             icon: icon_trip,
             animation: google.maps.Animation.DROP
           });
@@ -786,7 +787,24 @@ function changeOpacity() {
     heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
 }
 
-console.log('fetch json file: ' + field);
+
+
+function processPoints() {
+  var result = new Array();
+  var points = [{"_type":"party","_source":{"sentiment":{"type":"neutral"},"geo":{"coordinates":[-86.86604,35.92263],"type":"Point"},"user":"Legendary Kimbros","tweet":"Paul Kramer \u0026amp; Swing Street tonight at 6 followed by @musiccityroots after party at 9:30!… https://t.co/Orkv3LXEoU"}},{"_type":"running","_source":{"sentiment":{"type":"neutral"},"user":"Andrzej Brylka","geo":{"type":"Point","coordinates":[18.5298948,54.5534645]},"tweet":"I just finished running 0.86 km in 5m:40s with #Endomondo #endorphins https://t.co/79AnFXmdiM"}},{"_type":"running","_source":{"user":"うめずまさし@マラソンシーズンオフ","geo":{"type":"Point","coordinates":[135.1401742,34.7262479]},"tweet":"I was out running 5.53 km with #Endomondo #endorphins https://t.co/XXIOH2c9Jp","sentiment":{"type":"negative","score":"-0.241706"}}},{"_type":"concert","_source":{"user":"the girl can rap","geo":{"type":"Point","coordinates":[-79.39703374,43.64516982]},"tweet":"Don't miss out TONIGHT @samenightclub after the Rihanna concert 🎉 There will also be a concert… https://t.co/jpAYM0Y0kl","sentiment":{"type":"neutral"}}},{"_type":"party","_source":{"user":"Material Grrlz","tweet":"Calling allll 6-12th graders...don't miss this tonight's block party 6:30-8:30pm!!!! @ Shepherd… https://t.co/qHG6n0L2K9","sentiment":{"type":"positive","score":"0.210393"},"geo":{"coordinates":[-118.5633,34.2743],"type":"Point"}}},{"_type":"concert","_source":{"user":"Lynn S. Connaway","tweet":"Great concert with The Boss. @ Schottenstein Center, The Ohio State University https://t.co/m2YxJMUvgv","sentiment":{"type":"positive","score":"0.507311"},"geo":{"coordinates":[-84.16667435,39.7220636],"type":"Point"}}},{"_type":"concert","_source":{"sentiment":{"type":"positive","score":"0.303898"},"geo":{"coordinates":[8.5396694,47.3831786],"type":"Point"},"user":"Marco Studer","tweet":"neck deep was so awesome\n#neckdeep #poppunk #concert #zurich #werk21 #dynamo #music #live @… https://t.co/29kt7MiqOG"}},{"_type":"party","_source":{"sentiment":{"type":"negative","score":"-0.38482"},"geo":{"coordinates":[-78.64267,35.78551],"type":"Point"},"user":"madison milhous","tweet":"yesterday was her birthday but the party lasts forever @ Dads Have Rights Too https://t.co/YzaHSC4JK6"}},{"_type":"trip","_source":{"sentiment":{"score":"0.458807","type":"positive","mixed":"1"},"user":"Beth Palm","geo":{"type":"Point","coordinates":[-93.02463024,44.99099648]},"tweet":"Personal shopping trip! #socent #arcsvaluevillage (@ Arc's Value Village Thrift Store in Saint Paul, MN) https://t.co/e7yeNTN0PD"}},{"_type":"party","_source":{"geo":{"type":"Point","coordinates":[-118.5633,34.2743]},"user":"Material Grrlz","sentiment":{"score":"0.210393","type":"positive"},"tweet":"Calling allll 6-12th graders...don't miss this tonight's block party 6:30-8:30pm!!!! @ Shepherd… https://t.co/qHG6n0L2K9"}}]
+  for (var i = 0 ; i < points.length; i++){
+    var tmp = {
+      tweettype: points[i]["_type"],
+      sentiment: points[i]["_source"]["sentiment"]["type"],
+      LatLng: {lat: points[i]["_source"]["geo"]["coordinates"][1], lng: points[i]["_source"]["geo"]["coordinates"][0]},
+      tweet: points[i]["_source"]["tweet"]
+    };
+    result[i] = tmp;
+  }
+
+  return result;
+}
+
 
 // Heatmap data: 500 Points
 function getPoints() {
@@ -794,14 +812,18 @@ function getPoints() {
     // ref: http://stackoverflow.com/questions/15360393/force-code-to-execute-after-another-method-finishes-executing
 
     /* data format: getJSON[geometry]*/
-    $.getJSON('json?keyword='+field, function(data) {
+    $.getJSON('http://b31c4b03.ngrok.io/tweets/search.json', function(data) {
         points = [];
+        /*console.log(data);
         $.each( data, function( key, val ) { // key == geo
             val.forEach(function(coord) {
                 points.push(new google.maps.LatLng(coord['coordinates'][1], coord['coordinates'][0]));
             })
-        });
+        });*/
+
         deferred.resolve();
     });
     return deferred;
 }
+
+//getPoints();
