@@ -49,6 +49,8 @@ The best practice for ingesting Tweets and other streaming messages is to decoup
 
 1. hide key info before git push
 
+trackList = ['concert', 'trip', 'running', 'party']
+index
 new(ENV['AWS_ACCESS_KEY'], ENV['AWS_SECRET_ACCESS_KEY']),
 
 arn:aws:sns:us-east-1:664206762806:entertainment
@@ -81,6 +83,13 @@ http://www.sitepoint.com/full-text-search-rails-elasticsearch/
 
 # signal.pause()
 
+4. set_amazon_es
+    class static , not instance
+
+
+5. page is re rendered
+   save data directly
+  
 
 
 #### possible problems
@@ -101,6 +110,17 @@ http://www.sitepoint.com/full-text-search-rails-elasticsearch/
 
 ---
 
+{
+    "type" : {
+        "value" : "my_type"
+    }
+}
+
+
+{"user"=>"Mary Roeder",
+"sentiment"=>{"type"=>"negative", "score"=>"-0.284899"},
+"geo"=>"{'coordinates': [-83.73524, 42.27497], 'type': 'Point'}",
+"tweet"=>"Someone's running a side hustle out of the UMS Production office.  \n\n#mnozilbrass #umslobby… https://t.co/3lzZkvHE8r"}
 
 {
   "Type" : "Notification",
