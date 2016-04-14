@@ -29,16 +29,12 @@ http://guides.rubyonrails.org/asset_pipeline.html
     <%= javascript_include_tag '/assets/map', async: true, defer: true %>
 <% end %>
 
-config.assets.precompile += %w(.js)
 
 Active Record??
 
 ### Ruby
 
-    client.index  index: 'myindex', type: 'mytype', id: 1, body: { title: 'Test' }
-# => {"_index"=>"myindex", ... "created"=>true}
-
-what's patron
+what's  `patron`
 
 
 The best practice for ingesting Tweets and other streaming messages is to decouple collection and processing of high volume streams. For example, collect the raw text of messages in one process, passing each message into a message queue, rotated flatfile, or database. A second process or set of processes should parse the messages and extract any necessary fields for storage or further manipulation.
@@ -84,11 +80,13 @@ http://www.sitepoint.com/full-text-search-rails-elasticsearch/
 # signal.pause()
 
 4. set_amazon_es
-    class static , not instance
+    class static in application_controller , not instance
 
 
 5. page is re rendered
    save data directly
+
+6. delete main#home
 
 
 
@@ -110,32 +108,19 @@ http://www.sitepoint.com/full-text-search-rails-elasticsearch/
 
 ---
 
-{
-    "type" : {
-        "value" : "my_type"
-    }
-}
-
 
 {"user"=>"Mary Roeder",
 "sentiment"=>{"type"=>"negative", "score"=>"-0.284899"},
 "geo"=>"{'coordinates': [-83.73524, 42.27497], 'type': 'Point'}",
 "tweet"=>"Someone's running a side hustle out of the UMS Production office.  \n\n#mnozilbrass #umslobby… https://t.co/3lzZkvHE8r"}
 
-{
-  "Type" : "Notification",
-  "MessageId" : "ade681d5-28ea-52e6-af65-ce5d979a7f09",
-  "TopicArn" : "arn:aws:sns:us-east-1:664206762806:entertainment",
-  "Subject" : "try again",
-  "Message" : "sraintoairntioanrt",
-  "Timestamp" : "2016-04-13T21:42:08.389Z",
-  "SignatureVersion" : "1",
-  "Signature" : "OZJ+fYraa0Ox5aDIC13WtfzAsjFmZb+CpWi066i9z9NXmwJZHw3LGdjHMX5/pTbBnLqSplLbjZTk+kHktplEraKBXtOQUv5iBYzuux8W3HKou0+SOPqL6g/mSWxV62RCLCRrAuHg1bFGA9eccN33glxCsP3UZga6QB+5qC+X1EIP08U/9AJWB+Aqiwrp5UCbx1yYJ10S5ETo9i67WhF5cHg38EGTmFaduCuhgv066WsZCHZO+wBJ/Fjy5kHCKEUcWzfnf+PoUuZiu9wBaKzdjhusqzHArixZvH3XZan2yVP5l6dGPAysK+40Vi9s+kf8YwKpv81swbArbx5AS8SsKA==",
-  "SigningCertURL" : "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-bb750dd426d95ee9390147a5624348ee.pem",
-  "UnsubscribeURL" : "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:664206762806:entertainment:386f4e07-8496-42fb-9266-7f2bbc65d289",
-  "MessageAttributes" : {
-    "AWS.SNS.MOBILE.MPNS.Type" : {"Type":"String","Value":"token"},
-    "AWS.SNS.MOBILE.MPNS.NotificationClass" : {"Type":"String","Value":"realtime"},
-    "AWS.SNS.MOBILE.WNS.Type" : {"Type":"String","Value":"wns/badge"}
-  }
-}
+
+---
+
+https://docs.google.com/forms/d/1XZzrDsDdpsvzWRn3KIEmgbYMv_FK0eIsQD5bZyavoMM/viewform?usp=form_confirm
+
+
+var points = [{&quot;_index&quot;=&gt;&quot;.kibana-4&quot;, &quot;_type&quot;=&gt;&quot;index-pattern&quot;, &quot;_id&quot;=&gt;&quot;posts*&quot;, &quot;_score&quot;=&gt;1.0, &quot;_source&quot;=&gt;{&quot;title&quot;=&gt;&quot;posts*&quot;, &quot;customFormats&quot;=&gt;&quot;{}&quot;, &quot;fields&quot;=&gt;&quot;[{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:false,\&quot;analyzed\&quot;:false,\&quot;name\&quot;:\&quot;_index\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:true,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;author\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:true,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;topics\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:false,\&quot;name\&quot;:\&quot;_type\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:true,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;blog\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:true,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;title\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;number\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:false,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;awesomeness\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:false,\&quot;analyzed\&quot;:false,\&quot;name\&quot;:\&quot;_source\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:false,\&quot;analyzed\&quot;:false,\&quot;name\&quot;:\&quot;_id\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false}]&quot;}}, {&quot;_index&quot;=&gt;&quot;.kibana-4&quot;, &quot;_type&quot;=&gt;&quot;config&quot;, &quot;_id&quot;=&gt;&quot;4.0.3&quot;, &quot;_score&quot;=&gt;1.0, &quot;_source&quot;=&gt;{&quot;buildNum&quot;=&gt;6103, &quot;defaultIndex&quot;=&gt;&quot;twit3*&quot;}}, {&quot;_index&quot;=&gt;&quot;.kibana-4&quot;, &quot;_type&quot;=&gt;&quot;index-pattern&quot;, &quot;_id&quot;=&gt;&quot;twit3*&quot;, &quot;_score&quot;=&gt;1.0, &quot;_source&quot;=&gt;{&quot;title&quot;=&gt;&quot;twit3*&quot;, &quot;customFormats&quot;=&gt;&quot;{}&quot;, &quot;fields&quot;=&gt;&quot;[{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:true,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;user.location\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;number\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:false,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;place.bounding_box.coordinates\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:false,\&quot;analyzed\&quot;:false,\&quot;name\&quot;:\&quot;_index\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;number\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:false,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;geo.coordinates\&quot;,\&quot;count\&quot;:1,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:true,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;user.name\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:true,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;place.url\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:true,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;place.full_name\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:true,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;created_at\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:true,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;place.country\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:true,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;place.place_type\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:true,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;place.country_code\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:true,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;coordinates.type\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:true,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;text\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:true,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;geo.type\&quot;,\&quot;count\&quot;:6,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:true,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;place.name\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;number\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:false,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;user.id\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:false,\&quot;name\&quot;:\&quot;_type\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:true,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;place.bounding_box.type\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:true,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;place.id\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;number\&quot;,\&quot;indexed\&quot;:true,\&quot;analyzed\&quot;:false,\&quot;doc_values\&quot;:false,\&quot;name\&quot;:\&quot;coordinates.coordinates\&quot;,\&quot;count\&quot;:1,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:false,\&quot;analyzed\&quot;:false,\&quot;name\&quot;:\&quot;_source\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false},{\&quot;type\&quot;:\&quot;string\&quot;,\&quot;indexed\&quot;:false,\&quot;analyzed\&quot;:false,\&quot;name\&quot;:\&quot;_id\&quot;,\&quot;count\&quot;:0,\&quot;scripted\&quot;:false}]&quot;}}, {&quot;_index&quot;=&gt;&quot;foo&quot;, &quot;_type&quot;=&gt;&quot;party&quot;, &quot;_id&quot;=&gt;&quot;AVQSXR1cJ5wQa8uglXfC&quot;, &quot;_score&quot;=&gt;1.0, &quot;_source&quot;=&gt;{&quot;sentiment&quot;=&gt;{&quot;type&quot;=&gt;&quot;neutral&quot;}, &quot;geo&quot;=&gt;{&quot;coordinates&quot;=&gt;[-86.86604, 35.92263], &quot;type&quot;=&gt;&quot;Point&quot;}, &quot;user&quot;=&gt;&quot;Legendary Kimbros&quot;, &quot;tweet&quot;=&gt;&quot;Paul Kramer &amp;amp; Swing Street tonight at 6 followed by @musiccityroots after party at 9:30!… https://t.co/Orkv3LXEoU&quot;}}, {&quot;_index&quot;=&gt;&quot;foo&quot;, &quot;_type&quot;=&gt;&quot;running&quot;, &quot;_id&quot;=&gt;&quot;AVQSX1ykJ5wQa8uglXfF&quot;, &quot;_score&quot;=&gt;1.0, &quot;_source&quot;=&gt;{&quot;sentiment&quot;=&gt;{&quot;type&quot;=&gt;&quot;neutral&quot;}, &quot;user&quot;=&gt;&quot;Andrzej Brylka&quot;, &quot;geo&quot;=&gt;{&quot;type&quot;=&gt;&quot;Point&quot;, &quot;coordinates&quot;=&gt;[18.5298948, 54.5534645]}, &quot;tweet&quot;=&gt;&quot;I just finished running 0.86 km in 5m:40s with #Endomondo #endorphins https://t.co/79AnFXmdiM&quot;}}] ;
+
+
+

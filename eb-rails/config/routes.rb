@@ -2,8 +2,7 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  root 'main#home'
-  get 'show' => 'main#show'
+  root 'main#show'
 
   get 'tweets/search' #~~ json
 
