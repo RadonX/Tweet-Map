@@ -46,6 +46,7 @@ class TweetsController < ApplicationController
   def stream
     id = params[:id]
     msg = SSEManager.get_msg(id)
+    puts id, msg
     response.headers['Content-Type'] = 'text/event-stream'
     sse = SSE.new(response.stream, retry: 5000, event: "message")
     begin
