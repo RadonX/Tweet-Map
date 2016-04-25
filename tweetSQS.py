@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
 
+'''
+> python tweetSQS.py
+
+`tweetSQS.py` uses tweepyStream filters Twitter Stream and feeds data to `upload_tweet_with_geo()`,
+    which is a handler that uploads qualified tweets to Amazon SQS.
+'''
+
+queueName = 'test'
+
+
 import json
 from tweepyStream import TweepyStream
 import boto3
@@ -7,14 +17,16 @@ import boto3
 # Get the service resource
 sqs = boto3.resource('sqs')
 # Create/Get the SQS Queue instance
-queue = sqs.create_queue(QueueName='test')
+queue = sqs.create_queue(QueueName=queueName)
 
-trackList = []
 
-def upload_en_tweet_with_geo(json_data):
+def upload_tweet_with_geo(json_data):
     meta = json.loads(json_data)
     try:
-        if meta["coordinates"] and (meta["lang"] == "en"):
+        if meta["coordinates"]:
+            if  (meta["lang"] != "en"):
+                print(meta['lang'])
+                return False
 
             tweetAttr = {
                 "created_at": { # time
@@ -22,7 +34,7 @@ def upload_en_tweet_with_geo(json_data):
                     'DataType': 'String'
                 },
                 "coordinates": {
-                    'StringValue': meta["coordinates"].__str__(), # or dump to binary
+                    'StringValue': json.dumps(meta["coordinates"]),
                     'DataType': 'String'
                 }, # "place": meta["place"]
                 "user_id": {
@@ -49,15 +61,19 @@ def upload_en_tweet_with_geo(json_data):
 
 
 if __name__ == "__main__":
-    stream = TweepyStream(upload_en_tweet_with_geo).stream
-    trackList = ['concert', 'trip', 'running', 'party']
-    print("Enter keywords for tracking followed by a blank line to begin.")
+    stream = TweepyStream(upload_tweet_with_geo).stream
+    trackList = []
+    print("Enter keywords for tracking followed by a newline to begin. \
+            You will use the default track list if no keyword is entered. ")
     while True:
         keyword = input()
         if keyword == "": break
         trackList.append(keyword)
+    if len(trackList) == 0:
+        trackList = ['concert', 'trip', 'running', 'party']
     print("Start tracking", trackList)
-    stream.filter(track = trackList)
+    #ref: https://dev.twitter.com/streaming/overview/request-parameters
+    stream.filter(track = trackList, languages = ['en'])
     """
 Hillary Clinton
 Bernie Sanders

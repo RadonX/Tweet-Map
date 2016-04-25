@@ -7,8 +7,15 @@ from tweetSearch import tweetSearch
 tweetsearch = tweetSearch()
 tweetsearch.safe_check_index(INDEX)
 
-application = Flask(__name__)
 
+import logging
+logging.basicConfig(filename='tweetmap.log', level=logging.DEBUG)
+# logging.info('...')
+# logging.error('...')
+# logging.debug('...')
+
+
+application = Flask(__name__)
 
 @application.route('/')
 def index():

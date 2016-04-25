@@ -1,6 +1,6 @@
 
 
-var stage = $('#flying-tweet');
+var stage = $('#map');
 
 var Tweet = function(text){
     this.appearance =  $('<div style="min-width:400px;font-size:larger;color: #eeeeee;">'+text+'</div>');

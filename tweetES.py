@@ -3,13 +3,13 @@
 '''
     1. test ElasticSearch
         open command line that connects to [-r remote] ES
-        > python3 -i es.py -r
+        > python3 -i tweetES.py -r
     2. upload data to ES
         upload [-n nrecord] qualified tweets from [-f filename]
         starting from line [-s start] to ElasticSearch with [-i index]
-        > python3 es.py -s 1 -n 500 -f 'place.json' -i 'place'
+        > python3 tweetES.py -s 1 -n 500 -f 'place.json' -i 'place'
     3. upload newly fetched data from Twitter
-        > python3 es.py -r -i 'place'
+        > python3 tweetES.py -r -s 0 -i 'place'
 '''
 
 from elasticsearch import Elasticsearch, RequestsHttpConnection
@@ -93,7 +93,7 @@ def upload_tweet_file(file_name, start, nrecord):
 if __name__ == "__main__":
     if opt.start > 0:
         upload_tweet_file(opt.filename, opt.start, opt.nrecord)
-    elif opt.start == -1:
+    elif opt.start == 0:
         from tweepyStream import TweepyStream
         stream = TweepyStream(upload_tweet_with_geo).stream
         trackList = ['concert', 'trip', 'running', 'party']
@@ -113,4 +113,3 @@ John Kasich
 Gary Johnson
 Jill Stein
         """
-
