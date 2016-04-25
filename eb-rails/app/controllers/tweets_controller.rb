@@ -51,6 +51,7 @@ class TweetsController < ApplicationController
     begin
       if msg
         sse.write(msg, event: "message")
+        sse.close
         puts id, msg
       else
         render nothing: true
