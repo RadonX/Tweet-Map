@@ -1,8 +1,11 @@
 require 'json'
+require 'sse_manager'
 
 class TweetsController < ApplicationController
 
   def search
+
+    # the same to main#show
     indexstr = 'foo'
 
     keyword = params[:keyword] || 'all'
@@ -17,6 +20,7 @@ class TweetsController < ApplicationController
 
     @filteredTweets = result['hits']['hits'] #array
 
+    #json
   end
 
 
@@ -25,68 +29,54 @@ class TweetsController < ApplicationController
 
   # POST /tweets
   def create
-
     data =  request.body.read
     json = JSON.parse(data)
     message =  JSON.parse(json['Message'])
-
     send_to_es message
-
-    render text: 'hi'
+    SSEManager.publish message['tweet']
+    render nothing: true
   end
 
+
+  # Needed for response.stream/SSE
   include ActionController::Live
 
   def stream
-
+    id = params[:id]
+    msg = SSEManager.get_msg(id)
     response.headers['Content-Type'] = 'text/event-stream'
-    sse = SSE.new(response.stream, retry: 3000)
-    # sse = SSE.new(response.stream, retry: 300, event: "event-name")
-
+    sse = SSE.new(response.stream, retry: 5000, event: "message")
     begin
-
-      for i in 0..10
-        # sleep 1
-        sse.write({ name: 'John'}, id: 10, event: "message", retry: 500)
+      if msg
+        sse.write(msg)
+      else
+        render nothing: true
       end
-      # it is in batch
-
-      # Comment.on_change do |data|
-      #   sse.write(data)
-      # end
     rescue IOError
-      # Client Disconnected
     ensure
       sse.close
     end
-    # render nothing: true
 
   end
 
-
   private
 
-    def send_to_es(newtweet)
+  TRACKLIST = ['concert', 'trip', 'running', 'party']
+
+  def send_to_es(newtweet)
       set_amazon_es
-
-      trackList = ['concert', 'trip', 'running', 'party']
-      indexstr = 'foo'
-
-      isFound = false #~~
-      trackList.each do |type|
+      isFound = false
+      TRACKLIST.each do |type|
         if newtweet['tweet'].downcase.include? type
-          @es_client.index  index: indexstr, type: type, body: newtweet
+          @es_client.index  index: Rails.application.config.es_index, type: type, body: newtweet
           puts type
           isFound = true
           break
         end
       end
-      if !isFound
+      if !isFound # the coming tweet doesn't belong to any of the types
         puts newtweet['tweet']
       end
-
     end
-
-
 
 end

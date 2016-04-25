@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Tweet Heatmap</a>
+      <a class="navbar-brand" href="#">Tweet Map</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
@@ -35,8 +35,8 @@
 
 <div class="jumbotron" style="margin-bottom: 0px">
   <div class="container">
-    <!--h1 class="page-header">Twitter Heatmap</h1-->
     <div id="map"></div>
+    <div id="flying-tweet" style="width:inherit;height:400px;top:0;position:absolute;"></div>
   </div>
 </div>
 
@@ -91,12 +91,15 @@
 <!-- ================================================== -->
 
 <script>
+  var sseid = <%= @id %>;
   var points = <%= raw @filteredTweets.to_json %> ;
 </script>
 
-<%= javascript_include_tag 'map', async: true, defer: true  %>
+
+<%= javascript_include_tag 'map' %>
 
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDhmjEizB3PyRpcPrKCaqg6ugtJJlFIw8&libraries=visualization&callback=initMap">
 </script>
 
+<%= javascript_include_tag 'sse', defer: true %>
