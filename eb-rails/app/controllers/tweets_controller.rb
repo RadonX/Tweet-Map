@@ -32,6 +32,7 @@ class TweetsController < ApplicationController
     data =  request.body.read
     json = JSON.parse(data)
     message =  JSON.parse(json['Message'])
+    puts message # if not yet subscripted, see the log for subscription
     send_to_es message
     SSEManager.publish message['tweet']
     render nothing: true
