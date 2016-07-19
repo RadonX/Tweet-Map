@@ -1,25 +1,27 @@
-#### Resources
+This repository includes two course assignment of mine. The twitter streaming part is under the root directory and is shared between both assignment. `eb-flask` is a Flask application for assignment one, and `eb-rails` is an RoR application for assignment two. 
 
-0. [Tweets | Twitter Developers](https://dev.twitter.com/overview/api/tweets)
+Check [Cloud Computing | Trello](https://trello.com/b/3ggCBiei/cloud-computing) for more resources regarding the assignments. 
 
-1. [Tweepy 3.5.0 documentation](http://tweepy.readthedocs.org/en/v3.5.0/getting_started.html)
+#### Assignment 1 - Tweet Map
 
-2. [SQS — Boto 3 Docs 1.3.0 documentation](http://boto3.readthedocs.org/en/latest/reference/services/sqs.html#SQS.Queue.send_message)
-    - [SQS.Queue.receive_messages](http://boto3.readthedocs.org/en/latest/reference/services/sqs.html#SQS.Queue.receive_messages)
+The goal of this assignment is to provide you experience in developing and deploying a web application using AWS Cloud services. Your web application would collect Twitts and do some processing and represent the Twitts on GoogleMaps. Following are the required steps:  
 
-2. ElasticSearch
-  - [Having Fun: Python and Elasticsearch, Part 1 - bitquabit](https://bitquabit.com/post/having-fun-python-and-elasticsearch-part-1/)
-  - [Bulk API](https://www.elastic.co/guide/en/elasticsearch/reference/1.5/docs-bulk.html)
-  `es.indices.delete(index = opt.index)`
+1. Use [Twitter Streaming API](https://dev.twitter.com/streaming/overview) to fetch tweets from the twitter hose in real-time.
 
-10. [Creating a singleton in Python - Stack Overflow](http://stackoverflow.com/questions/6760685)
+2. Use [ElasticSearch](https://www.elastic.co/products/elasticsearch)([elastic/elasticsearch: Open Source, Distributed, RESTful Search Engine](https://github.com/elastic/elasticsearch)) or [AWS CloudSearch](https://aws.amazon.com/cloudsearch/) to store the tweets on the backend
 
+3. Create a web UI that allows users to search for a few keywords (via a dropdown). The keywords (up to 10) can be of your choosing.
 
-#### todo
+3. Use [Google Maps API](https://developers.google.com/maps/documentation/javascript/) to render these filtered tweets in the map in whatever manner you want.
 
-1. extract/learn necessary code from tweepy
-
-2. geo is obsolete
+4. Deploy your application on [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/) in an auto-scaling environment.
 
 
+#### Assignment 2 - SQS and SNS
 
+- Use the [Amazon SQS service](https://aws.amazon.com/sqs/) to create a processing queue for the Tweets that are delivered by the Twitter Streaming API. 
+- Use [Amazon SNS service](https://aws.amazon.com/sns/) to update the status processing on each tweet so the UI can refresh.
+- Integrate a third party cloud service API into the Tweet processing flow.
+
+- Architecture Diagram
+ ![](http://i.imgur.com/ouIDUJT.png)
