@@ -6,4 +6,4 @@ MarkupSafe==0.23
 requests==2.9.1
 requests-aws4auth==0.9
 urllib3==1.14
-Werkzeug==0.11.4
+Werkzeug==0.15.3
